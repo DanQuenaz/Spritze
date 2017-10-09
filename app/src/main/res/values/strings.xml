@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Spritze</string>
+    <string name="user_nameBox">Usuário</string>
+    <string name="user_passwordBox">Senha</string>
+    <string name="loginButton">Entrar</string>
+    <string name="registerButton">Cadastrar Usuário</string>
+</resources>

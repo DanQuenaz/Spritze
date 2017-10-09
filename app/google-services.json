@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "171352139335",
+    "firebase_url": "https://spritze-a14da.firebaseio.com",
+    "project_id": "spritze-a14da",
+    "storage_bucket": "spritze-a14da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171352139335:android:8d371015d5a8ed56",
+        "android_client_info": {
+          "package_name": "com.unifei.spritze.spritze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171352139335-470fk14d8rh3v062u25fnc154j68g85k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unifei.spritze.spritze",
+            "certificate_hash": "25a2acf15482c6367741901bb571d7039fb4bcce"
+          }
+        },
+        {
+          "client_id": "171352139335-u9lks8bfrnac1tbc6ht7lmff8ucqlraf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-s6Ho0omiVsJQUq6xHA8Yab2Ka7vECDk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171352139335-u9lks8bfrnac1tbc6ht7lmff8ucqlraf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
