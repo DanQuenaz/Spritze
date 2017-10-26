@@ -11,8 +11,8 @@ public class Medic extends User {
 
     public Medic(){}
 
-    public Medic(String email, String password, String name, String cpf, String address, String tel, String crm, String specialization) {
-        super(email, password, name, cpf, address, tel);
+    public Medic(String email, String password, String name, String cpf, String address, String tel, String type, String crm, String specialization) {
+        super(email, password, name, cpf, address, tel, type);
         this.crm = crm;
         this.specialization = specialization;
     }

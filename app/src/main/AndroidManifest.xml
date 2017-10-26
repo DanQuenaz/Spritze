@@ -16,10 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".medicLogin" />
-        <activity android:name=".masterLogin" />
         <activity android:name=".masterLoged" />
-        <activity android:name=".medicLoged"></activity>
+        <activity android:name=".medicLoged" />
+        <activity android:name=".nurseLoged"></activity>
     </application>
 
 </manifest>
