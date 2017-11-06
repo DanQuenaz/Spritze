@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else if(text.equals("medic")){
                                 Intent intent = new Intent(MainActivity.this, medicLoged.class);
+                                intent.putExtra("medicEmail", auxEmail);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();
                             }
