@@ -30,7 +30,7 @@ public class medicLoged extends AppCompatActivity {
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
     private List<String> hospitals = new ArrayList<String>();
-
+    private String selectedHospital;
     private DatabaseReference rootBD;
     private DatabaseReference auxRef;
     private String medicEmail;
@@ -47,6 +47,15 @@ public class medicLoged extends AppCompatActivity {
         prepareListData();
         this.listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         this.expListView.setAdapter(this.listAdapter);
+
+        this.expListView.setOnChildClickListener(new OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                selectedHospital = hospitals.get(childPosition);
+                Toast.makeText(medicLoged.this, selectedHospital + " selecionado!", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 
     private void prepareListData(){
