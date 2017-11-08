@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".masterLoged" />
         <activity android:name=".medicLoged" />
-        <activity android:name=".nurseLoged"></activity>
+        <activity android:name=".nurseLoged" />
+        <activity android:name=".dosageActivity"></activity>
     </application>
 
 </manifest>
