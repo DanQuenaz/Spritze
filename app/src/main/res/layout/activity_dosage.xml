@@ -8,7 +8,48 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bglogin">
+
+        <LinearLayout
+            android:id="@+id/layoutData"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:background="@drawable/papertexture"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/pacientName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/pacientAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"/>
+            <EditText
+                android:id="@+id/pesoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Peso" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Altura" />
+
+        </LinearLayout>
 
         <SearchView
             android:id="@+id/searchRemedio"
@@ -16,7 +57,7 @@
             android:layout_alignParentEnd="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"/>
+            android:layout_below="@+id/layoutData"/>
 
         <ListView
             android:id="@+id/remediosList"
@@ -27,23 +68,7 @@
             android:layout_below="@+id/searchRemedio"/>
 
 
-        <EditText
-            android:id="@+id/pesoText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/remediosList"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Peso" />
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pesoText"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Altura" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
