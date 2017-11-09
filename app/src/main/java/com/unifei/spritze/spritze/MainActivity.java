@@ -1,14 +1,19 @@
 package com.unifei.spritze.spritze;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import firebase.ConfigFireBase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private ImageButton loginBtn;
     private EditText loginEmail;
     private EditText loginPass;
@@ -31,22 +36,44 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference rootBD;
     private DatabaseReference auxRef;
     private String auxEmail;
+    private TextInputLayout usernameWrapper;
+    private TextInputLayout passwordWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //capture the size of the devices screen
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        //define the Layout height
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
+        layout.setMinimumHeight(size.y/2);
+
         loginBtn = (ImageButton) findViewById(R.id.loginButton);
         loginEmail = (EditText) findViewById(R.id.loginEmail);
         loginPass = (EditText) findViewById(R.id.loginPass);
+        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+        passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
 
         rootBD = ConfigFireBase.getDataReference();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validLogin(loginEmail.getText().toString(), loginPass.getText().toString());
+                boolean login = loginEmail.getText().toString().isEmpty();
+                boolean password = loginPass.getText().toString().isEmpty();
+
+                if(login) usernameWrapper.setError("Campo não pode ser vazio");
+                else usernameWrapper.setErrorEnabled(false);
+
+                if(password) passwordWrapper.setError("Campo não pode ser vazio");
+                else passwordWrapper.setErrorEnabled(false);
+
+                if(!login && !password)
+                    validLogin(loginEmail.getText().toString(), loginPass.getText().toString());
             }
         });
 

@@ -30,14 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blueAccent"
-            app:srcCompat="@drawable/newuser"/>
+            android:src="@drawable/newuser"/>
 
         <ImageButton
             android:id="@+id/btnDosar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blueAccent"
-            app:srcCompat="@drawable/dosage"/>
+            android:src="@drawable/dosage"/>
         <ListView
             android:id="@+id/listPacients"
             android:layout_width="match_parent"

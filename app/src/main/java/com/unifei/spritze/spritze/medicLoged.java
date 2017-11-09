@@ -35,7 +35,7 @@ import entities.Pacient;
 import entities.User;
 import firebase.ConfigFireBase;
 
-public class medicLoged extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class medicLoged extends Activity implements SearchView.OnQueryTextListener {
     private ExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
     private List<String> listDataHeader;
