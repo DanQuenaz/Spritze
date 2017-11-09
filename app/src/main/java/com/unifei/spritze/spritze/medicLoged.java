@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -35,23 +36,17 @@ import entities.Pacient;
 import entities.User;
 import firebase.ConfigFireBase;
 
-public class medicLoged extends Activity implements SearchView.OnQueryTextListener {
-    private ExpandableListAdapter listAdapter;
-    private ExpandableListView expListView;
-    private List<String> listDataHeader;
-    private HashMap<String, List<String>> listDataChild;
-    private List<String> hospitals;
-    private String selectedHospital;
+public class medicLoged extends AppCompatActivity implements SearchView.OnQueryTextListener {
+
     private DatabaseReference rootBD;
     private DatabaseReference auxRef;
     private String medicEmail;
+    private String selectedHospital;
     private ImageButton btnDosar;
-    private User paciente;
     private ListView listPacientes;
     private SearchView filter;
-    private static ArrayList<Pacient> allPacients;
+    private ArrayList<Pacient> allPacients;
 
-    private String[] _namesP;
 
 
     @Override
@@ -59,39 +54,25 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medic_loged);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        this.rootBD = ConfigFireBase.getDataReference();
+        this.allPacients = new ArrayList<Pacient>();
+        this.selectedHospital = (String)getIntent().getSerializableExtra("Hospital");
         this.listPacientes = (ListView) findViewById(R.id.listPacients);
         this.filter = (SearchView) findViewById(R.id.searchPacient);
-        this.btnDosar = (ImageButton) findViewById(R.id.btnDosar);
-        this.btnDosar.setOnClickListener(new View.OnClickListener() {
+
+        getPacients();
+        listPacientes.setTextFilterEnabled(true);
+        setupSearchView();
+
+
+        this.listPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Pacient auxP = (Pacient) adapterView.getAdapter().getItem(i);
                 Intent intent = new Intent(medicLoged.this, dosageActivity.class);
-                intent.putExtra("Paciente", new String());
+                intent.putExtra("Nome", auxP.getName());
+                intent.putExtra("Idade", auxP.getAge());
                 startActivity(intent);
-            }
-        });
-        this.rootBD = ConfigFireBase.getDataReference();
-        this.medicEmail = (String)getIntent().getSerializableExtra("medicEmail");
-        this.expListView = (ExpandableListView) findViewById(R.id.listHosp);
-        prepareListData();
-        this.listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        this.expListView.setAdapter(this.listAdapter);
-
-        this.expListView.setOnChildClickListener(new OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                selectedHospital = hospitals.get(childPosition);
-                Toast.makeText(medicLoged.this, selectedHospital + " selecionado!", Toast.LENGTH_LONG).show();
-                getPacients();
-
-                for (Pacient _aux:medicLoged.allPacients) {
-                    Log.e("Teste: ", _aux.getName());
-                }
-                String[] auxS = new String[] { "Google", "Apple", "Samsung", "Sony", "LG", "HTC", "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
-                listPacientes.setAdapter(new ArrayAdapter<String>(medicLoged.this, R.layout.pacient_item_list, auxS));
-                listPacientes.setTextFilterEnabled(true);
-                setupSearchView();
-                return false;
             }
         });
 
@@ -102,53 +83,23 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         filter.setIconifiedByDefault(false);
         filter.setOnQueryTextListener(this);
         filter.setSubmitButtonEnabled(true);
-        filter.setQueryHint("Search Here");
-    }
-
-    private void prepareListData(){
-        this.listDataHeader = new ArrayList<String>();
-        this.listDataChild = new HashMap<String, List<String>>();
-
-        this.listDataHeader.add("Hospitais");
-        getMedicData();
-        this.listDataChild.put(this.listDataHeader.get(0), hospitals);
-
-    }
-
-    private void getMedicData(){
-        this.hospitals = new ArrayList<String>();
-        this.auxRef = this.rootBD.child("Colaborador").child(this.medicEmail).child("hospitals");
-        this.auxRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String auxS = dataSnapshot.getValue(String.class);
-                String auxL[] = auxS.split(" ");
-                for (String index:auxL) {
-                    hospitals.add(index);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        filter.setQueryHint("Search Pacient Here");
     }
 
     private void getPacients(){
-        medicLoged.allPacients = new ArrayList<Pacient>();
+
         this.auxRef = this.rootBD.child("Hospital").child(this.selectedHospital).child("Pacientes");
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("Count " ,""+dataSnapshot.getChildrenCount());
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Pacient auxPacient = postSnapshot.getValue(Pacient.class);
-                    medicLoged.allPacients.add(new Pacient(auxPacient.getName(), auxPacient.getAge(), auxPacient.getCpf(), auxPacient.getAdress(), auxPacient.getTell()));
-                    Log.e("Get Data", auxPacient.getName());
+                    allPacients.add(new Pacient(auxPacient.getName(), auxPacient.getAge(), auxPacient.getCpf(), auxPacient.getAdress(), auxPacient.getTell()));
                 }
-                Log.e("Count:", ""+medicLoged.allPacients.size());
+                listPacientes.setAdapter(new ArrayAdapter<Pacient>(medicLoged.this, R.layout.pacient_item_list, allPacients));
+                listPacientes.setTextFilterEnabled(true);
+                Log.e("Count1", ""+allPacients.size());
+
             }
 
             @Override

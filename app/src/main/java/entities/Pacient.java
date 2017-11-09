@@ -60,4 +60,8 @@ public class Pacient {
     public void setTell(Long tell) {
         this.tell = tell;
     }
+
+    public String toString(){
+        return this.name;
+    }
 }

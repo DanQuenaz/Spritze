@@ -10,40 +10,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/bglogin">
 
-        <ExpandableListView
-            android:id="@+id/listHosp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20">
-
-
-        </ExpandableListView>
-        <SearchView
-            android:id="@+id/searchPacient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20"/>
         <ImageButton
             android:id="@+id/btnNewPacient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blueAccent"
-            android:src="@drawable/newuser"/>
-
-        <ImageButton
-            android:id="@+id/btnDosar"
+            app:srcCompat="@drawable/newuser" />
+        <android.support.v4.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blueAccent"
-            android:src="@drawable/dosage"/>
+            android:layout_height="20dp" />
+        <SearchView
+            android:id="@+id/searchPacient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <ListView
             android:id="@+id/listPacients"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20"/>
-
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
