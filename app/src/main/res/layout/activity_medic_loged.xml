@@ -12,19 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ExpandableListView
-            android:id="@+id/listHosp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20">
-
-
-        </ExpandableListView>
         <SearchView
             android:id="@+id/searchPacient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.20"/>
+
         <ImageButton
             android:id="@+id/btnNewPacient"
             android:layout_width="match_parent"
@@ -38,12 +31,12 @@
             android:layout_height="wrap_content"
             android:background="@color/blueAccent"
             app:srcCompat="@drawable/dosage"/>
+
         <ListView
             android:id="@+id/listPacients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.20"/>
-
 
     </LinearLayout>
 

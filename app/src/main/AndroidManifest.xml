@@ -19,7 +19,8 @@
         <activity android:name=".masterLoged" />
         <activity android:name=".medicLoged" />
         <activity android:name=".nurseLoged" />
-        <activity android:name=".dosageActivity"></activity>
+        <activity android:name=".dosageActivity" />
+        <activity android:name=".hospital_select"></activity>
     </application>
 
 </manifest>
