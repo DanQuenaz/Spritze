@@ -59,15 +59,6 @@ public class medicLoged extends AppCompatActivity implements SearchView.OnQueryT
         this.selectedHospital = (String)getIntent().getSerializableExtra("Hospital");
         this.listPacientes = (ListView) findViewById(R.id.listPacients);
         this.filter = (SearchView) findViewById(R.id.searchPacient);
-        this.btnDosar = (ImageButton) findViewById(R.id.btnDosar);
-        this.btnDosar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(medicLoged.this, dosageActivity.class);
-                intent.putExtra("Paciente", new String());
-                startActivity(intent);
-            }
-        });
 
         getPacients();
         listPacientes.setTextFilterEnabled(true);
@@ -78,7 +69,10 @@ public class medicLoged extends AppCompatActivity implements SearchView.OnQueryT
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Pacient auxP = (Pacient) adapterView.getAdapter().getItem(i);
-                Log.e("Name:", auxP.getName());
+                Intent intent = new Intent(medicLoged.this, dosageActivity.class);
+                intent.putExtra("Nome", auxP.getName());
+                intent.putExtra("Idade", auxP.getAge());
+                startActivity(intent);
             }
         });
 
@@ -89,7 +83,7 @@ public class medicLoged extends AppCompatActivity implements SearchView.OnQueryT
         filter.setIconifiedByDefault(false);
         filter.setOnQueryTextListener(this);
         filter.setSubmitButtonEnabled(true);
-        filter.setQueryHint("Search Here");
+        filter.setQueryHint("Search Pacient Here");
     }
 
     private void getPacients(){

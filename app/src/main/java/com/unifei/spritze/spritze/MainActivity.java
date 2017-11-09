@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         loginBtn = (ImageButton) findViewById(R.id.loginButton);
         loginEmail = (EditText) findViewById(R.id.loginEmail);
         loginPass = (EditText) findViewById(R.id.loginPass);
-
         rootBD = ConfigFireBase.getDataReference();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
