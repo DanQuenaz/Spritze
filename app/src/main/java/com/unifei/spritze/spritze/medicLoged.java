@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -57,6 +58,7 @@ public class medicLoged extends AppCompatActivity implements SearchView.OnQueryT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medic_loged);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         this.listPacientes = (ListView) findViewById(R.id.listPacients);
         this.filter = (SearchView) findViewById(R.id.searchPacient);
         this.btnDosar = (ImageButton) findViewById(R.id.btnDosar);

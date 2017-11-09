@@ -7,61 +7,46 @@
     tools:context="com.unifei.spritze.spritze.medicLoged">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="460dp">
+        android:orientation="vertical">
 
         <ExpandableListView
             android:id="@+id/listHosp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerVertical="true" />
+            android:layout_weight="0.20">
 
+
+        </ExpandableListView>
         <SearchView
             android:id="@+id/searchPacient"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/listHosp"/>
-
-        <ListView
-            android:id="@+id/listPacients"
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/searchPacient"
-            android:layout_above="@+id/btnNewPacient"/>
-
-
+            android:layout_weight="0.20"/>
         <ImageButton
             android:id="@+id/btnNewPacient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btnDosar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="19dp"
             android:background="@color/blueAccent"
-            app:srcCompat="@drawable/newuser" />
+            app:srcCompat="@drawable/newuser"/>
 
         <ImageButton
             android:id="@+id/btnDosar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="19dp"
             android:background="@color/blueAccent"
-            app:srcCompat="@drawable/dosage" />
-    </RelativeLayout>
+            app:srcCompat="@drawable/dosage"/>
+        <ListView
+            android:id="@+id/listPacients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.20"/>
+
+
+    </LinearLayout>
+
 
 
 
