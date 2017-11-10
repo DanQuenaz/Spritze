@@ -1,5 +1,6 @@
 package com.unifei.spritze.spritze;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import firebase.ConfigFireBase;
 
-public class hospital_select extends AppCompatActivity {
+public class hospital_select extends Activity {
     private DatabaseReference rootDB;
     private ListView hospList;
     private String medicEmail;

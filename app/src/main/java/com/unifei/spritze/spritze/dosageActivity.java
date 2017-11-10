@@ -1,22 +1,19 @@
 package com.unifei.spritze.spritze;
 
-
 import android.app.Activity;
-
-import android.content.Intent;
-
+import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 
-public class dosageActivity extends AppCompatActivity {
+public class dosageActivity extends Activity {
+
     private String pacientName;
     private Long pacientAge;
     private double pacientWeight;
     private TextView pctName;
     private TextView pctAge;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
