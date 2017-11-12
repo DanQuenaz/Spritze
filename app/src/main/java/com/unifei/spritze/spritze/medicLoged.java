@@ -1,6 +1,7 @@
 package com.unifei.spritze.spritze;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 import android.text.TextUtils;
@@ -47,8 +49,6 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
     private SearchView filter;
     private ArrayList<Pacient> allPacients;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +60,15 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         this.listPacientes = (ListView) findViewById(R.id.listPacients);
         this.filter = (SearchView) findViewById(R.id.searchPacient);
 
+        //capture the size of the devices screen
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        //define the Layout height
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
+        layout.setMinimumHeight(size.y/2);
+
         getPacients();
-        listPacientes.setTextFilterEnabled(true);
         setupSearchView();
 
 
@@ -83,11 +90,10 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         filter.setIconifiedByDefault(false);
         filter.setOnQueryTextListener(this);
         filter.setSubmitButtonEnabled(true);
-        filter.setQueryHint("Search Pacient Here");
+        filter.setQueryHint("Procure Paciente Aqui");
     }
 
     private void getPacients(){
-
         this.auxRef = this.rootBD.child("Hospital").child(this.selectedHospital).child("Pacientes");
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
