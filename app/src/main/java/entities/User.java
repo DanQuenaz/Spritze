@@ -6,18 +6,16 @@ package entities;
 
 public class User {
     private String email;
-    private String password;
     private String name;
-    private String cpf;
+    private Long cpf;
     private String address;
-    private String tel;
+    private Long tel;
     private String type;
 
     public User(){}
 
-    public User(String email, String password, String name, String cpf, String address, String tel, String type) {
+    public User(String email, String name, Long cpf, String address, Long tel, String type) {
         this.email = email;
-        this.password = password;
         this.name = name;
         this.cpf = cpf;
         this.address = address;
@@ -33,14 +31,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getName() {
         return name;
     }
@@ -49,11 +39,11 @@ public class User {
         this.name = name;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 
@@ -65,11 +55,11 @@ public class User {
         this.address = address;
     }
 
-    public String getTel() {
+    public Long getTel() {
         return tel;
     }
 
-    public void setTel(String tel) {
+    public void setTel(Long tel) {
         this.tel = tel;
     }
 

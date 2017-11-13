@@ -20,7 +20,8 @@
         <activity android:name=".medicLoged" />
         <activity android:name=".nurseLoged" />
         <activity android:name=".dosageActivity" />
-        <activity android:name=".hospital_select"></activity>
+        <activity android:name=".hospital_select" />
+        <activity android:name=".medicRecipeView"></activity>
     </application>
 
 </manifest>

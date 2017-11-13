@@ -33,7 +33,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import Adapters.Comunicator;
 import Adapters.ExpandableListAdapter;
+import entities.Medic;
 import entities.Pacient;
 import entities.User;
 import firebase.ConfigFireBase;
@@ -42,21 +44,25 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
 
     private DatabaseReference rootBD;
     private DatabaseReference auxRef;
-    private String medicEmail;
-    private String selectedHospital;
+    private String medicKey;
+    private String hospitalKey;
     private ImageButton btnDosar;
     private ListView listPacientes;
     private SearchView filter;
     private ArrayList<Pacient> allPacients;
+    private ArrayList<Object> auxList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medic_loged);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        this.medicKey = (String)getIntent().getSerializableExtra("medicKey");
+        this.hospitalKey = (String)getIntent().getSerializableExtra("hospitalKey");
+
         this.rootBD = ConfigFireBase.getDataReference();
         this.allPacients = new ArrayList<Pacient>();
-        this.selectedHospital = (String)getIntent().getSerializableExtra("Hospital");
         this.listPacientes = (ListView) findViewById(R.id.listPacients);
         this.filter = (SearchView) findViewById(R.id.searchPacient);
 
@@ -70,18 +76,37 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
 
         getPacients();
         setupSearchView();
-
-
-        this.listPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.auxRef = rootBD.child("Colaborador").child(this.medicKey);
+        this.auxRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Pacient auxP = (Pacient) adapterView.getAdapter().getItem(i);
-                Intent intent = new Intent(medicLoged.this, dosageActivity.class);
-                intent.putExtra("Nome", auxP.getName());
-                intent.putExtra("Idade", auxP.getAge());
-                startActivity(intent);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final Medic auxMdc = dataSnapshot.getValue(Medic.class);
+                listPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Pacient auxP = (Pacient) adapterView.getAdapter().getItem(i);
+                        Intent intent = new Intent(medicLoged.this, dosageActivity.class);
+                        intent.putExtra("pacientName", auxP.getName());
+                        intent.putExtra("pacientAge", auxP.getAge());
+                        intent.putExtra("pacientkey", auxP.getCpf());
+                        intent.putExtra("medicName", auxMdc.getName());
+                        intent.putExtra("medicCrm", auxMdc.getCrm());
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
+        Comunicator.getInstance();
+        Comunicator.printAll();
+
+
 
 
     }
@@ -94,7 +119,7 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
     }
 
     private void getPacients(){
-        this.auxRef = this.rootBD.child("Hospital").child(this.selectedHospital).child("Pacientes");
+        this.auxRef = this.rootBD.child("Hospital").child(this.hospitalKey).child("Pacientes");
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -104,7 +129,6 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
                 }
                 listPacientes.setAdapter(new ArrayAdapter<Pacient>(medicLoged.this, R.layout.pacient_item_list, allPacients));
                 listPacientes.setTextFilterEnabled(true);
-                Log.e("Count1", ""+allPacients.size());
 
             }
 

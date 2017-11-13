@@ -33,7 +33,7 @@ import firebase.ConfigFireBase;
 public class hospital_select extends Activity implements SearchView.OnQueryTextListener{
     private DatabaseReference rootBD;
     private ListView hospList;
-    private String medicEmail;
+    private String medicKey;
     private SearchView filter;
 
     @Override
@@ -42,7 +42,7 @@ public class hospital_select extends Activity implements SearchView.OnQueryTextL
         setContentView(R.layout.activity_hospital_select);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         this.rootBD = ConfigFireBase.getDataReference();
-        this.medicEmail = (String)getIntent().getSerializableExtra("medicEmail");
+        this.medicKey = (String)getIntent().getSerializableExtra("medicKey");
         this.hospList = (ListView) findViewById(R.id.listHosp);
         this.filter = (SearchView) findViewById(R.id.searchHospital);
 
@@ -61,7 +61,8 @@ public class hospital_select extends Activity implements SearchView.OnQueryTextL
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(hospital_select.this, medicLoged.class);
-                intent.putExtra("Hospital", (String)adapterView.getAdapter().getItem(i));
+                intent.putExtra("hospitalKey", (String)adapterView.getAdapter().getItem(i));
+                intent.putExtra("medicKey", medicKey);
                 startActivity(intent);
             }
         });
@@ -75,7 +76,7 @@ public class hospital_select extends Activity implements SearchView.OnQueryTextL
     }
 
     private void getHospitals(){
-        final DatabaseReference auxRef  = this.rootBD.child("Colaborador").child(this.medicEmail).child("hospitals");
+        final DatabaseReference auxRef  = this.rootBD.child("Colaborador").child(this.medicKey).child("hospitals");
         auxRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

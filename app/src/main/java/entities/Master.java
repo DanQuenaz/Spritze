@@ -9,8 +9,8 @@ public class Master extends User {
 
     public Master() {}
 
-    public Master(String email, String password, String name, String cpf, String address, String tel, String type, String function) {
-        super(email, password, name, cpf, address, tel, type);
+    public Master(String email, String name, Long cpf, String address, Long tel, String type, String function) {
+        super(email, name, cpf, address, tel, type);
         this.function = function;
     }
 

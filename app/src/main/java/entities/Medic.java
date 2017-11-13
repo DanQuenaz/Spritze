@@ -6,22 +6,30 @@ package entities;
 
 public class Medic extends User {
 
-    private String crm;
+    private Long crm;
     private String specialization;
+    private String hospitals;
 
     public Medic(){}
 
-    public Medic(String email, String password, String name, String cpf, String address, String tel, String type, String crm, String specialization) {
-        super(email, password, name, cpf, address, tel, type);
+    public Medic(Long crm, String specialization, String hospitals) {
         this.crm = crm;
         this.specialization = specialization;
+        this.hospitals = hospitals;
     }
 
-    public String getCrm() {
+    public Medic(String email, String name, Long cpf, String address, Long tel, String type, Long crm, String specialization, String hospitals) {
+        super(email, name, cpf, address, tel, type);
+        this.crm = crm;
+        this.specialization = specialization;
+        this.hospitals = hospitals;
+    }
+
+    public Long getCrm() {
         return crm;
     }
 
-    public void setCrm(String crm) {
+    public void setCrm(Long crm) {
         this.crm = crm;
     }
 
@@ -31,5 +39,17 @@ public class Medic extends User {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    public String getHospitals() {
+        return hospitals;
+    }
+
+    public void setHospitals(String hospitals) {
+        this.hospitals = hospitals;
+    }
+
+    public String toString(){
+        return super.getName();
     }
 }

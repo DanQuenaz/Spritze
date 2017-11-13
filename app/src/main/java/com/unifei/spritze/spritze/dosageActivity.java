@@ -1,19 +1,50 @@
 package com.unifei.spritze.spritze;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
-public class dosageActivity extends Activity {
+import java.util.ArrayList;
+import java.util.Calendar;
 
+import Adapters.Comunicator;
+import Calc.DosageCalculation;
+import entities.Pacient;
+import entities.Recipe;
+import entities.Remedy;
+import firebase.ConfigFireBase;
+
+
+public class dosageActivity extends Activity implements SearchView.OnQueryTextListener {
+
+    private String medic;
+    private Long crm;
     private String pacientName;
     private Long pacientAge;
+    private String pacientKey;
     private double pacientWeight;
     private TextView pctName;
     private TextView pctAge;
+    private ListView listDrugs;
+    private SearchView filter;
+    private ArrayList<Remedy> allDrugs;
+    private DatabaseReference rootDB;
+    private DatabaseReference auxRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +54,86 @@ public class dosageActivity extends Activity {
         this.pctName = (TextView) findViewById(R.id.pacientName);
         this.pctAge = (TextView) findViewById(R.id.pacientAge);
 
-        this.pacientName = (String)getIntent().getSerializableExtra("Nome");
-        this.pacientAge = (Long)getIntent().getSerializableExtra("Idade");
+        this.pacientName = (String)getIntent().getSerializableExtra("pacientName");
+        this.pacientAge = (Long)getIntent().getSerializableExtra("pacientAge");
+        this.medic = (String)getIntent().getSerializableExtra("medicName");
+        this.crm = (Long)getIntent().getSerializableExtra("medicCrm");
+        this.pacientKey = (String)getIntent().getSerializableExtra("pacientKey");
 
         this.pctName.setText("Nome: " + this.pacientName);
         this.pctAge.setText("Idade: " + Long.toString( this.pacientAge));
+        this.allDrugs = new ArrayList<Remedy>();
+        this.rootDB = ConfigFireBase.getDataReference();
+        this.listDrugs = (ListView) findViewById(R.id.remediosList);
+        this.filter = (SearchView) findViewById(R.id.searchRemedio);
+
+        this.listDrugs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Remedy auxRem = (Remedy)adapterView.getAdapter().getItem(i);
+                String text = DosageCalculation.Calc(auxRem.getName(), pacientWeight, pacientAge);
+                String date = Calendar.getInstance().getTime().toString();
+                Recipe auxRec = new Recipe(auxRem.getName(), text, date, "", medic, crm);
+                Intent intent = new Intent(dosageActivity.this, medicRecipeView.class);
+                Comunicator.getInstance();
+                Comunicator.clear();
+                Comunicator.addObject("pacientKey", pacientKey);
+                Comunicator.addObject("pacientAge", pacientAge);
+                Comunicator.addObject("pacientName", pacientName);
+                Comunicator.addObject("medicName", medic);
+                Comunicator.addObject("medicCrm", crm);
+                Comunicator.addObject("recipe", auxRec);
+                startActivity(intent);
+            }
+        });
+
+        getDrugs();
+        setupSearchView();
     }
+
+    private void setupSearchView(){
+        filter.setIconifiedByDefault(false);
+        filter.setOnQueryTextListener(this);
+        filter.setSubmitButtonEnabled(true);
+        filter.setQueryHint("Procure Remedios Aqui");
+    }
+
+    private void getDrugs(){
+        this.auxRef = this.rootDB.child("Remedios");
+        this.auxRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Remedy auxPacient = postSnapshot.getValue(Remedy.class);
+                    Log.e("Count", auxPacient.toString());
+
+                    allDrugs.add(new Remedy(auxPacient.getName(), auxPacient.getDescription(), auxPacient.getManufacturer()));
+                }
+                listDrugs.setAdapter(new ArrayAdapter<Remedy>(dosageActivity.this, R.layout.pacient_item_list, allDrugs));
+                listDrugs.setTextFilterEnabled(true);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if (TextUtils.isEmpty(s)) {
+            listDrugs.clearTextFilter();
+        } else {
+            listDrugs.setFilterText(s.toString());
+        }
+        return true;
+    }
+
 }

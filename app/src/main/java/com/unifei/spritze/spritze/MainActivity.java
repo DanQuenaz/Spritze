@@ -20,6 +20,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import entities.Medic;
+import entities.User;
 import firebase.ConfigFireBase;
 
 public class MainActivity extends Activity {
@@ -89,23 +92,23 @@ public class MainActivity extends Activity {
                     auxEmail = email.replace(".com", "");
                     auxEmail = auxEmail.replace(".br", "");
                     auxEmail = auxEmail.replace("@", "_");
-                    auxRef = rootBD.child("Colaborador").child(auxEmail).child("type");
+                    auxRef = rootBD.child("Colaborador").child(auxEmail);
                     auxRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            String text = dataSnapshot.getValue(String.class);
-                            if(text.equals("master")){
+                            User auxUsr = dataSnapshot.getValue(User.class);
+                            if(auxUsr.getType().equals("master")){
                                 Intent intent = new Intent(MainActivity.this, masterLoged.class);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();
                             }
-                            else if(text.equals("medic")){
+                            else if(auxUsr.getType().equals("medic")){
                                 Intent intent = new Intent(MainActivity.this, hospital_select.class);
-                                intent.putExtra("medicEmail", auxEmail);
+                                intent.putExtra("medicKey", auxEmail);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();
                             }
-                            else if(text.equals("nurse")){
+                            else if(auxUsr.getType().equals("nurse")){
                                 Intent intent = new Intent(MainActivity.this, nurseLoged.class);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();

@@ -7,8 +7,8 @@ package entities;
 public class Nurse extends User {
     private String coren;
 
-    public Nurse(String email, String password, String name, String cpf, String address, String tel, String type, String coren) {
-        super(email, password, name, cpf, address, tel, type);
+    public Nurse(String email, String name, Long cpf, String address, Long tel, String type, String coren) {
+        super(email, name, cpf, address, tel, type);
         this.coren = coren;
     }
 
