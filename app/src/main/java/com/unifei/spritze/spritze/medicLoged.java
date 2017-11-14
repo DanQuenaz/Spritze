@@ -88,7 +88,9 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
                         Intent intent = new Intent(medicLoged.this, dosageActivity.class);
                         intent.putExtra("pacientName", auxP.getName());
                         intent.putExtra("pacientAge", auxP.getAge());
-                        intent.putExtra("pacientkey", auxP.getCpf());
+                        intent.putExtra("pacientKey", Long.toString(auxP.getCpf()));
+                        Log.e("View", "Value: " + Long.toString(auxP.getCpf()));
+                        intent.putExtra("hospitalKey", hospitalKey);
                         intent.putExtra("medicName", auxMdc.getName());
                         intent.putExtra("medicCrm", auxMdc.getCrm());
                         startActivity(intent);
@@ -106,9 +108,6 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         Comunicator.getInstance();
         Comunicator.printAll();
 
-
-
-
     }
 
     private void setupSearchView(){
@@ -123,6 +122,7 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Pacient auxPacient = postSnapshot.getValue(Pacient.class);
                     allPacients.add(new Pacient(auxPacient.getName(), auxPacient.getAge(), auxPacient.getCpf(), auxPacient.getAdress(), auxPacient.getTell()));

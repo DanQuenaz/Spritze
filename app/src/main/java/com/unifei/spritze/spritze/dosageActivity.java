@@ -37,6 +37,7 @@ public class dosageActivity extends Activity implements SearchView.OnQueryTextLi
     private String pacientName;
     private Long pacientAge;
     private String pacientKey;
+    private String hospitalKey;
     private double pacientWeight;
     private TextView pctName;
     private TextView pctAge;
@@ -59,6 +60,8 @@ public class dosageActivity extends Activity implements SearchView.OnQueryTextLi
         this.medic = (String)getIntent().getSerializableExtra("medicName");
         this.crm = (Long)getIntent().getSerializableExtra("medicCrm");
         this.pacientKey = (String)getIntent().getSerializableExtra("pacientKey");
+        this.hospitalKey = (String)getIntent().getSerializableExtra("hospitalKey");
+        Log.e("View", "Value: " + this.pacientKey);
 
         this.pctName.setText("Nome: " + this.pacientName);
         this.pctAge.setText("Idade: " + Long.toString( this.pacientAge));
@@ -82,6 +85,7 @@ public class dosageActivity extends Activity implements SearchView.OnQueryTextLi
                 Comunicator.addObject("pacientName", pacientName);
                 Comunicator.addObject("medicName", medic);
                 Comunicator.addObject("medicCrm", crm);
+                Comunicator.addObject("hospitalKey", hospitalKey);
                 Comunicator.addObject("recipe", auxRec);
                 startActivity(intent);
             }
