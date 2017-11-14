@@ -11,6 +11,9 @@ public class Recipe {
     private String observations;
     private String medic;
     private Long crm;
+    private String nurse;
+    private Long coren;
+    private String status;
 
     public Recipe() {
     }
@@ -22,6 +25,44 @@ public class Recipe {
         this.observations = observations;
         this.medic = medic;
         this.crm = crm;
+        this.status = "Não aplicado ainda";
+    }
+
+    public Recipe(String remedy, String text, String date, String observations, String medic, Long crm, String nurse, Long coren, String status) {
+        this.remedy = remedy;
+        this.text = text;
+        this.date = date;
+        this.observations = observations;
+        this.medic = medic;
+        this.crm = crm;
+        this.nurse = nurse;
+        this.coren = coren;
+        this.status = "Não aplicado ainda";
+
+    }
+
+    public String getNurse() {
+        return nurse;
+    }
+
+    public void setNurse(String nurse) {
+        this.nurse = nurse;
+    }
+
+    public Long getCoren() {
+        return coren;
+    }
+
+    public void setCoren(Long coren) {
+        this.coren = coren;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getRemedy() {
@@ -73,7 +114,7 @@ public class Recipe {
     }
 
     public String toString(){
-        return this.getDate();
+        return (this.getRemedy() + " - "+ this.getDate());
     }
 
 

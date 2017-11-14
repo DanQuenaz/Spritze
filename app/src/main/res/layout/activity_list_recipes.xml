@@ -39,7 +39,7 @@
             card_view:cardCornerRadius="4dp">
 
             <SearchView
-                android:id="@+id/Nurse_searchPacient"
+                android:id="@+id/Nurse_searchRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -61,7 +61,7 @@
             card_view:cardCornerRadius="4dp">
 
             <ListView
-                android:id="@+id/Nurse_listPacients"
+                android:id="@+id/Nurse_listRecipes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

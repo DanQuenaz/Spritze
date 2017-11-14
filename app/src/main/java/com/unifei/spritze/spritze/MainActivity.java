@@ -21,7 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import Adapters.Comunicator;
 import entities.Medic;
+import entities.Nurse;
 import entities.User;
 import firebase.ConfigFireBase;
 
@@ -109,7 +111,13 @@ public class MainActivity extends Activity {
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();
                             }
                             else if(auxUsr.getType().equals("nurse")){
+                                Nurse nurAux = dataSnapshot.getValue(Nurse.class);
+                                Comunicator.getInstance();
+                                Comunicator.clear();
+                                Comunicator.addObject("nurse", nurAux);
                                 Intent intent = new Intent(MainActivity.this, nurseLoged.class);
+                                intent.putExtra("nurseKey", auxEmail);
+                                intent.putExtra("hospitalKey", auxUsr.getHospitals());
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();
                             }

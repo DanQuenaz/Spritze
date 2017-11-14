@@ -8,21 +8,18 @@ public class Medic extends User {
 
     private Long crm;
     private String specialization;
-    private String hospitals;
 
     public Medic(){}
 
-    public Medic(Long crm, String specialization, String hospitals) {
+    public Medic(Long crm, String specialization) {
         this.crm = crm;
         this.specialization = specialization;
-        this.hospitals = hospitals;
     }
 
-    public Medic(String email, String name, Long cpf, String address, Long tel, String type, Long crm, String specialization, String hospitals) {
-        super(email, name, cpf, address, tel, type);
+    public Medic(String email, String name, Long cpf, String address, Long tel, String type, String hospitals, Long crm, String specialization) {
+        super(email, name, cpf, address, tel, type, hospitals);
         this.crm = crm;
         this.specialization = specialization;
-        this.hospitals = hospitals;
     }
 
     public Long getCrm() {
@@ -39,17 +36,5 @@ public class Medic extends User {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
-    }
-
-    public String getHospitals() {
-        return hospitals;
-    }
-
-    public void setHospitals(String hospitals) {
-        this.hospitals = hospitals;
-    }
-
-    public String toString(){
-        return super.getName();
     }
 }

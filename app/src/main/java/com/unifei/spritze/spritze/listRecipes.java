@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,79 +16,81 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ObjectStreamException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Adapters.Comunicator;
 import entities.Nurse;
 import entities.Pacient;
+import entities.Recipe;
 import firebase.ConfigFireBase;
 
-public class nurseLoged extends Activity implements SearchView.OnQueryTextListener{
-    private ListView listPacientes;
+public class listRecipes extends Activity implements SearchView.OnQueryTextListener{
+
     private SearchView filter;
-    private ArrayList<Pacient> allPacients;
-    private String hospitalKey;
+    private ListView listRecipes;
     private DatabaseReference rootBD;
     private DatabaseReference auxRef;
-    private Nurse nurseLoged;
+    private ArrayList<Recipe> allRecipes;
+    private Pacient pacient;
+    private Nurse nurse;
+    private String hospitalKey;
     private HashMap<String, Object> auxCom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nurse_loged);
+        setContentView(R.layout.activity_list_recipes);
+
         this.auxCom = Comunicator.getInstance();
-        this.listPacientes = (ListView) findViewById(R.id.Nurse_listPacients);
-        this.filter = (SearchView) findViewById(R.id.Nurse_searchPacient);
-        this.allPacients = new ArrayList<Pacient>();
-        this.hospitalKey = (String)getIntent().getSerializableExtra("hospitalKey");
-        this.nurseLoged = (Nurse)auxCom.get("nurse");
+        this.listRecipes = (ListView) findViewById(R.id.Nurse_listRecipes);
+        this.filter = (SearchView) findViewById(R.id.Nurse_searchRecipe);
+        this.allRecipes = new ArrayList<Recipe>();
+        this.hospitalKey = (String)auxCom.get("hospitalKey");
+        this.nurse = (Nurse)auxCom.get("nurse");
+        this.pacient = (Pacient)auxCom.get("pacient");
         this.rootBD = ConfigFireBase.getDataReference();
 
-        Log.e("Nome", "Value: " + nurseLoged.getEmail());
-
-        getPacients();
+        getRecipes();
         setupSearchView();
 
-        this.listPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.listRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Pacient pAux = (Pacient) adapterView.getAdapter().getItem(i);
-
+                Recipe auxReci = (Recipe)adapterView.getAdapter().getItem(i);
                 Comunicator.getInstance();
                 Comunicator.clear();
-                Comunicator.addObject("pacient", pAux);
-                Comunicator.addObject("nurse", nurseLoged);
+                Comunicator.addObject("recipe", auxReci);
+                Comunicator.addObject("pacient", pacient);
                 Comunicator.addObject("hospitalKey", hospitalKey);
 
-                Intent intent = new Intent(nurseLoged.this, listRecipes.class);
+                Intent intent = new Intent(listRecipes.this, nurseRecipeView.class);
                 startActivity(intent);
-
             }
         });
-
     }
+
 
     private void setupSearchView(){
         filter.setIconifiedByDefault(false);
         filter.setOnQueryTextListener(this);
         filter.setSubmitButtonEnabled(true);
-        filter.setQueryHint("Procure Paciente Aqui");
+        filter.setQueryHint("Procure Receitas Aqui");
     }
 
-    private void getPacients(){
-        this.auxRef = this.rootBD.child("Hospital").child(this.hospitalKey).child("Pacientes");
+    private void getRecipes(){
+        this.auxRef = this.rootBD.child("Hospital").child(this.hospitalKey).child("Pacientes").child(Long.toString(pacient.getCpf())).child("Recipes");
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Pacient auxPacient = postSnapshot.getValue(Pacient.class);
-                    allPacients.add(new Pacient(auxPacient.getName(), auxPacient.getAge(), auxPacient.getCpf(), auxPacient.getAdress(), auxPacient.getTell()));
+                    Recipe auxRecipe = postSnapshot.getValue(Recipe.class);
+                    allRecipes.add(auxRecipe);
                 }
-                listPacientes.setAdapter(new ArrayAdapter<Pacient>(nurseLoged.this, R.layout.pacient_item_list, allPacients));
-                listPacientes.setTextFilterEnabled(true);
+                listRecipes.setAdapter(new ArrayAdapter<Recipe>(listRecipes.this, R.layout.pacient_item_list, allRecipes));
+                listRecipes.setTextFilterEnabled(true);
 
             }
 
@@ -108,10 +109,11 @@ public class nurseLoged extends Activity implements SearchView.OnQueryTextListen
     @Override
     public boolean onQueryTextChange(String s) {
         if (TextUtils.isEmpty(s)) {
-            listPacientes.clearTextFilter();
+            listRecipes.clearTextFilter();
         } else {
-            listPacientes.setFilterText(s.toString());
+            listRecipes.setFilterText(s.toString());
         }
         return true;
     }
+
 }

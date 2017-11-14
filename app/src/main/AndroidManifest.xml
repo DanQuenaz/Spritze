@@ -21,7 +21,9 @@
         <activity android:name=".nurseLoged" />
         <activity android:name=".dosageActivity" />
         <activity android:name=".hospital_select" />
-        <activity android:name=".medicRecipeView"></activity>
+        <activity android:name=".medicRecipeView" />
+        <activity android:name=".nurseRecipeView" />
+        <activity android:name=".listRecipes"></activity>
     </application>
 
 </manifest>

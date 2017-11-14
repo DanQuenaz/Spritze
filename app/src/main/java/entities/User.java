@@ -11,16 +11,18 @@ public class User {
     private String address;
     private Long tel;
     private String type;
+    private String hospitals;
 
     public User(){}
 
-    public User(String email, String name, Long cpf, String address, Long tel, String type) {
+    public User(String email, String name, Long cpf, String address, Long tel, String type, String hospitals) {
         this.email = email;
         this.name = name;
         this.cpf = cpf;
         this.address = address;
         this.tel = tel;
         this.type = type;
+        this.hospitals = hospitals;
     }
 
     public String getEmail() {
@@ -65,6 +67,14 @@ public class User {
 
     public String getType() {
         return type;
+    }
+
+    public String getHospitals() {
+        return hospitals;
+    }
+
+    public void setHospitals(String hospitals) {
+        this.hospitals = hospitals;
     }
 
     public void setType(String type) {
