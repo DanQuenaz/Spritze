@@ -29,9 +29,7 @@ public final class Comunicator {
         stream.clear();
     }
 
-    public static void printAll(){
-        for(int i=0; i<stream.size(); ++i){
-            Log.e("QQ", ""+stream.get(i));
-        }
+    public static Object getItem(String index){
+        return stream.get(index);
     }
 }

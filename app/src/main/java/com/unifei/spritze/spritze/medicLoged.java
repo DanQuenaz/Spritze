@@ -2,6 +2,7 @@ package com.unifei.spritze.spritze;
 
 import android.content.Intent;
 import android.graphics.Point;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -46,7 +47,7 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
     private DatabaseReference auxRef;
     private String medicKey;
     private String hospitalKey;
-    private ImageButton btnDosar;
+    private ImageButton btnNwPct;
     private ListView listPacientes;
     private SearchView filter;
     private ArrayList<Pacient> allPacients;
@@ -58,6 +59,7 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         setContentView(R.layout.activity_medic_loged);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        this.btnNwPct = (ImageButton) findViewById(R.id.btnNewPacient);
         this.medicKey = (String)getIntent().getSerializableExtra("medicKey");
         this.hospitalKey = (String)getIntent().getSerializableExtra("hospitalKey");
 
@@ -105,8 +107,15 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
             }
         });
 
-        Comunicator.getInstance();
-        Comunicator.printAll();
+        btnNwPct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(medicLoged.this, registerPacient.class);
+                Comunicator.getInstance();
+                Comunicator.addObject("hospitalKey", hospitalKey);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -122,7 +131,7 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                allPacients.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Pacient auxPacient = postSnapshot.getValue(Pacient.class);
                     allPacients.add(new Pacient(auxPacient.getName(), auxPacient.getAge(), auxPacient.getCpf(), auxPacient.getAdress(), auxPacient.getTell()));

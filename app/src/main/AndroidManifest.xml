@@ -23,7 +23,8 @@
         <activity android:name=".hospital_select" />
         <activity android:name=".medicRecipeView" />
         <activity android:name=".nurseRecipeView" />
-        <activity android:name=".listRecipes"></activity>
+        <activity android:name=".listRecipes" />
+        <activity android:name=".registerPacient"></activity>
     </application>
 
 </manifest>
