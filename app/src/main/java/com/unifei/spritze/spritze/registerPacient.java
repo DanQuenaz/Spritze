@@ -1,6 +1,7 @@
 package com.unifei.spritze.spritze;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.media.Image;
 import android.media.MediaMetadata;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +47,14 @@ public class registerPacient extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_pacient);
+
+        //capture the size of the devices screen
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        //define the Layout height
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
+        layout.setMinimumHeight(size.y/2);
 
         btnRegister = (ImageButton) findViewById(R.id.btnRegisterPct);
 

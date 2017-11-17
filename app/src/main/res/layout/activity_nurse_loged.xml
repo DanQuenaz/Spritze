@@ -22,18 +22,11 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <android.support.v4.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:id="@+id/spacer"
-            android:layout_below="@+id/btnNewPacient"/>
-
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:focusableInTouchMode="true"
             android:id="@+id/card_view"
             android:layout_gravity="center"
-            android:layout_below="@+id/spacer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="4dp">

@@ -2,6 +2,7 @@ package com.unifei.spritze.spritze;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +53,14 @@ public class listRecipes extends Activity implements SearchView.OnQueryTextListe
         this.nurse = (Nurse)auxCom.get("nurse");
         this.pacient = (Pacient)auxCom.get("pacient");
         this.rootBD = ConfigFireBase.getDataReference();
+
+        //capture the size of the devices screen
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        //define the Layout height
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
+        layout.setMinimumHeight(size.y/2);
 
         getRecipes();
         setupSearchView();

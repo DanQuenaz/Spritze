@@ -1,11 +1,13 @@
 package com.unifei.spritze.spritze;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -36,6 +38,14 @@ public class nurseRecipeView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nurse_recipe_view);
 
+        //capture the size of the devices screen
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        //define the Layout height
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
+        layout.setMinimumHeight(size.y/2);
+
         this.pctName = (TextView) findViewById(R.id.Nurse_pctName);
         this.pctAge = (TextView) findViewById(R.id.Nurse_pctAge);
         this.medicName = (TextView) findViewById(R.id.Nurse_medic);
@@ -53,7 +63,7 @@ public class nurseRecipeView extends Activity {
         this.hospitalKey = (String) this.auxCom.get("hospitalKey");
 
         this.pctName.setText(this.pacient.getName());
-        this.pctAge.setText(Long.toString(this.pacient.getAge()));
+        this.pctAge.setText(Long.toString(this.pacient.getAge()) + " anos");
 
         this.medicName.setText(this.recipe.getMedic());
         this.medicCrm.setText(Long.toString(this.recipe.getCrm()));
