@@ -49,15 +49,17 @@
                         android:id="@+id/imageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/user" />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/usernameWrapper"
                         android:focusableInTouchMode="true"
                         android:layout_width="match_parent"
+                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/imageView"
-                        android:paddingStart="16dp"
+                        android:layout_toRightOf="@+id/imageView"
+                        android:paddingLeft="16dp"
                         android:theme="@style/Theme.AppCompat.Light">
 
                         <EditText
@@ -72,7 +74,6 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:id="@+id/passwordLayout"
                     android:layout_below="@+id/loginLayout"
@@ -84,15 +85,17 @@
                         android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/lock" />
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/key" />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/passwordWrapper"
                         android:focusableInTouchMode="true"
                         android:layout_width="match_parent"
+                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/imageView2"
-                        android:paddingStart="16dp"
+                        android:layout_toRightOf="@+id/imageView2"
+                        android:paddingLeft="16dp"
                         android:theme="@style/Theme.AppCompat.Light">
 
                         <EditText
@@ -107,9 +110,15 @@
 
                 </RelativeLayout>
 
+                <Space
+                    android:id="@+id/spacer"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/passwordLayout"
+                    android:layout_height="16dp" />
+
                 <ImageButton
                     android:id="@+id/loginButton"
-                    android:layout_below="@+id/passwordLayout"
+                    android:layout_below="@+id/spacer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/blueAccent"
