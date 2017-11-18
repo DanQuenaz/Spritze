@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -41,6 +42,8 @@ public class nurseLoged extends Activity implements SearchView.OnQueryTextListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nurse_loged);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         this.auxCom = Comunicator.getInstance();
         this.listPacientes = (ListView) findViewById(R.id.Nurse_listPacients);
         this.filter = (SearchView) findViewById(R.id.Nurse_searchPacient);
