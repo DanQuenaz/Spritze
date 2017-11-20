@@ -68,14 +68,6 @@ public class medicLoged extends Activity implements SearchView.OnQueryTextListen
         this.listPacientes = (ListView) findViewById(R.id.listPacients);
         this.filter = (SearchView) findViewById(R.id.searchPacient);
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
-
         getPacients();
         setupSearchView();
         this.auxRef = rootBD.child("Colaborador").child(this.medicKey);

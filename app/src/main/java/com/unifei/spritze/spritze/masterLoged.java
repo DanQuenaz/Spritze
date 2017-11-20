@@ -13,12 +13,5 @@ public class masterLoged extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_loged);
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
     }
 }

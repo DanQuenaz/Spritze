@@ -56,14 +56,6 @@ public class listRecipes extends Activity implements SearchView.OnQueryTextListe
         this.pacient = (Pacient)auxCom.get("pacient");
         this.rootBD = ConfigFireBase.getDataReference();
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
-
         getRecipes();
         setupSearchView();
 

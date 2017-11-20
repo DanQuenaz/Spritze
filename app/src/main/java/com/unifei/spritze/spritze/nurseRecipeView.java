@@ -38,14 +38,6 @@ public class nurseRecipeView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nurse_recipe_view);
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
-
         this.pctName = (TextView) findViewById(R.id.Nurse_pctName);
         this.pctAge = (TextView) findViewById(R.id.Nurse_pctAge);
         this.medicName = (TextView) findViewById(R.id.Nurse_medic);

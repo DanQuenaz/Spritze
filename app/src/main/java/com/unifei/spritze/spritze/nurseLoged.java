@@ -54,14 +54,6 @@ public class nurseLoged extends Activity implements SearchView.OnQueryTextListen
 
         Log.e("Nome", "Value: " + nurseLoged.getEmail());
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
-
         getPacients();
         setupSearchView();
 

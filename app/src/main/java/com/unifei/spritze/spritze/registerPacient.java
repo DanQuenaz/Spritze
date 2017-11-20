@@ -48,14 +48,6 @@ public class registerPacient extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_pacient);
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
-
         btnRegister = (ImageButton) findViewById(R.id.btnRegisterPct);
 
         rootDB = ConfigFireBase.getDataReference();
