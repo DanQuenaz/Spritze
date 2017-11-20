@@ -46,14 +46,6 @@ public class hospital_select extends Activity implements SearchView.OnQueryTextL
         this.hospList = (ListView) findViewById(R.id.listHosp);
         this.filter = (SearchView) findViewById(R.id.searchHospital);
 
-        //capture the size of the devices screen
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-
-        //define the Layout height
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.bottonColor);
-        layout.setMinimumHeight(size.y/2);
-
         getHospitals();
         setupSearchView();
 

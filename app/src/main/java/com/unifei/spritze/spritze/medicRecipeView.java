@@ -45,8 +45,8 @@ public class medicRecipeView extends Activity {
 
         this.info = Comunicator.getInstance();
 
-        this.pctName.setText("Nome: " + info.get("pacientName"));
-        this.pctAge.setText("Idade: " + info.get("pacientAge"));
+        this.pctName.setText("" + info.get("pacientName"));
+        this.pctAge.setText("" + info.get("pacientAge") + " anos");
         this.auxRec = (Recipe)info.get("recipe");
         this.textRecipe.setText(auxRec.getText());
         this.textObs.setText(auxRec.getObservations());

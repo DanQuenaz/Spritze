@@ -1,12 +1,14 @@
 package com.unifei.spritze.spritze;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -54,7 +56,7 @@ public class nurseRecipeView extends Activity {
         this.hospitalKey = (String) this.auxCom.get("hospitalKey");
 
         this.pctName.setText(this.pacient.getName());
-        this.pctAge.setText(Long.toString(this.pacient.getAge()));
+        this.pctAge.setText(Long.toString(this.pacient.getAge()) + " anos");
 
         this.medicName.setText(this.recipe.getMedic());
         this.medicCrm.setText(Long.toString(this.recipe.getCrm()));

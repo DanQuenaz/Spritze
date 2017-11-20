@@ -5,22 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
+    android:padding="16dp"
     tools:context="com.unifei.spritze.spritze.hospital_select">
-
-    <RelativeLayout
-        android:id="@+id/bottonColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true">
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -60,10 +46,5 @@
             </ListView>
 
         </android.support.v7.widget.CardView>
-
-
-
-    </RelativeLayout>
-
 
 </RelativeLayout>

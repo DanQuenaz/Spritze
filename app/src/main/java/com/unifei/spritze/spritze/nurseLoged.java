@@ -2,14 +2,17 @@ package com.unifei.spritze.spritze;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +42,8 @@ public class nurseLoged extends Activity implements SearchView.OnQueryTextListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nurse_loged);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         this.auxCom = Comunicator.getInstance();
         this.listPacientes = (ListView) findViewById(R.id.Nurse_listPacients);
         this.filter = (SearchView) findViewById(R.id.Nurse_searchPacient);
