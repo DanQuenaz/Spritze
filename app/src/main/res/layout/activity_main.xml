@@ -21,10 +21,11 @@
         android:layout_below="@+id/logo"
         android:id="@+id/title"
         android:text="Spritze"
-        android:textSize="24dp"
+        android:textSize="40dp"
+        android:fontFamily="@font/bookmanoldstyle"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:paddingBottom="30dp"
+        android:paddingBottom="33dp"
         android:layout_centerHorizontal="true"/>
 
     <RelativeLayout
