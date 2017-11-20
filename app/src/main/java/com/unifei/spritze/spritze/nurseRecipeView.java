@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -66,7 +67,12 @@ public class nurseRecipeView extends Activity {
         this.textObs.setText(this.recipe.getObservations());
         this.textObs.setActivated(false);
 
+        this.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
     }
 }
