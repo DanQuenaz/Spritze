@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import Adapters.Comunicator;
+import entities.Master;
 import entities.Medic;
 import entities.Nurse;
 import entities.User;
@@ -100,7 +101,11 @@ public class MainActivity extends Activity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             User auxUsr = dataSnapshot.getValue(User.class);
                             if(auxUsr.getType().equals("master")){
+                                Master master = dataSnapshot.getValue(Master.class);
                                 Intent intent = new Intent(MainActivity.this, masterLoged.class);
+                                Comunicator.getInstance();
+                                Comunicator.clear();
+                                Comunicator.addObject("master", master);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Logado com sucesso!", Toast.LENGTH_SHORT).show();
                             }

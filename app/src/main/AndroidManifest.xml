@@ -24,7 +24,10 @@
         <activity android:name=".medicRecipeView" />
         <activity android:name=".nurseRecipeView" />
         <activity android:name=".listRecipes" />
-        <activity android:name=".registerPacient"></activity>
+        <activity android:name=".registerPacient" />
+        <activity android:name=".masterView" />
+        <activity android:name=".masterViewDosages" />
+        <activity android:name=".registerCollaborator"></activity>
     </application>
 
 </manifest>

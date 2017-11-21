@@ -8,7 +8,7 @@ public class Pacient {
     private String name;
     private Long age;
     private Long cpf;
-    private String adress;
+    private String address;
     private Long tell;
 
     public Pacient(){}
@@ -17,7 +17,7 @@ public class Pacient {
         this.name = name;
         this.age = age;
         this.cpf = cpf;
-        this.adress = adress;
+        this.address = adress;
         this.tell = tell;
     }
 
@@ -46,11 +46,11 @@ public class Pacient {
     }
 
     public String getAdress() {
-        return adress;
+        return address;
     }
 
     public void setAdress(String adress) {
-        this.adress = adress;
+        this.address = adress;
     }
 
     public Long getTell() {
