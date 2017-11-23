@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import Adapters.Comunicator;
+import Utils.StringFormat;
 import entities.Master;
 import entities.Medic;
 import entities.Nurse;
@@ -92,9 +93,7 @@ public class MainActivity extends Activity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    auxEmail = email.replace(".com", "");
-                    auxEmail = auxEmail.replace(".br", "");
-                    auxEmail = auxEmail.replace("@", "_");
+                    auxEmail = StringFormat.formatEmail(email);
                     auxRef = rootBD.child("Colaborador").child(auxEmail);
                     auxRef.addValueEventListener(new ValueEventListener() {
                         @Override

@@ -59,7 +59,12 @@ public class masterView extends Activity implements SearchView.OnQueryTextListen
         btnNwCollaborator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Comunicator.getInstance();
+                Comunicator.clear();
+                Comunicator.addObject("master", master);
 
+                Intent intent = new Intent(masterView.this, registerCollaborator.class);
+                startActivity(intent);
             }
         });
 
