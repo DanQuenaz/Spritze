@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentMap;
 
 import Adapters.Comunicator;
 import entities.Master;
@@ -53,6 +54,21 @@ public class masterViewDosages extends Activity implements SearchView.OnQueryTex
 
         getDosages();
         setupSearchView();
+
+        listDosages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Recipe recipe = (Recipe)parent.getAdapter().getItem(position);
+
+                Comunicator.getInstance();
+                Comunicator.clear();
+                Comunicator.addObject("recipe", recipe);
+                Comunicator.addObject("master", master);
+
+                Intent intent = new Intent(masterViewDosages.this, masterRecipeView.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupSearchView(){

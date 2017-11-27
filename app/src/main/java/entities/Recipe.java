@@ -5,6 +5,8 @@ package entities;
  */
 
 public class Recipe {
+    private String pctName;
+    private Long pctAge;
     private String remedy;
     private String text;
     private String date;
@@ -16,6 +18,20 @@ public class Recipe {
     private String status;
 
     public Recipe() {
+    }
+
+    public Recipe(String pctName, Long pctAge, String remedy, String text, String date, String observations, String medic, Long crm, String nurse, Long coren, String status) {
+        this.pctName = pctName;
+        this.pctAge = pctAge;
+        this.remedy = remedy;
+        this.text = text;
+        this.date = date;
+        this.observations = observations;
+        this.medic = medic;
+        this.crm = crm;
+        this.nurse = nurse;
+        this.coren = coren;
+        this.status = status;
     }
 
     public Recipe(String remedy, String text, String date, String observations, String medic, Long crm) {
@@ -39,6 +55,22 @@ public class Recipe {
         this.coren = coren;
         this.status = "Não aplicado ainda";
 
+    }
+
+    public String getPctName() {
+        return pctName;
+    }
+
+    public void setPctName(String pctName) {
+        this.pctName = pctName;
+    }
+
+    public Long getPctAge() {
+        return pctAge;
+    }
+
+    public void setPctAge(Long pctAge) {
+        this.pctAge = pctAge;
     }
 
     public String getNurse() {

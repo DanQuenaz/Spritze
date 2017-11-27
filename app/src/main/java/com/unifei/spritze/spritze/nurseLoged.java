@@ -52,7 +52,7 @@ public class nurseLoged extends Activity implements SearchView.OnQueryTextListen
         this.nurseLoged = (Nurse)auxCom.get("nurse");
         this.rootBD = ConfigFireBase.getDataReference();
 
-        Log.e("Nome", "Value: " + nurseLoged.getEmail());
+        Log.e("Nome", "Value: " + nurseLoged.getName());
 
         getPacients();
         setupSearchView();
@@ -88,7 +88,7 @@ public class nurseLoged extends Activity implements SearchView.OnQueryTextListen
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                allPacients.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Pacient auxPacient = postSnapshot.getValue(Pacient.class);
                     allPacients.add(new Pacient(auxPacient.getName(), auxPacient.getAge(), auxPacient.getCpf(), auxPacient.getAdress(), auxPacient.getTell()));

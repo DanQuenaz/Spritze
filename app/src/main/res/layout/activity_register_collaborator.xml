@@ -27,7 +27,7 @@
                 android:id="@+id/pacientName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cadastro Paciente"
+                android:text="Cadastro Colaborador"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 

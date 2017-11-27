@@ -20,12 +20,13 @@ import java.util.HashMap;
 
 import Adapters.Comunicator;
 import Utils.StringFormat;
-import entities.Nurse;
+import entities.Master;
+import entities.Master;
 import entities.Pacient;
 import entities.Recipe;
 import firebase.ConfigFireBase;
 
-public class nurseRecipeView extends Activity {
+public class masterRecipeView extends Activity {
     private TextView pctName;
     private TextView pctAge;
     private EditText textRecipe;
@@ -37,7 +38,7 @@ public class nurseRecipeView extends Activity {
     private HashMap<String, Object> auxCom;
     private Recipe recipe;
     private Pacient pacient;
-    private Nurse nurseLoged;
+    private Master masterLoged;
     private String hospitalKey;
     private DatabaseReference rootDB;
     private DatabaseReference auxRef;
@@ -46,27 +47,27 @@ public class nurseRecipeView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nurse_recipe_view);
+        setContentView(R.layout.activity_master_recipe_view);
 
-        this.pctName = (TextView) findViewById(R.id.Nurse_pctName);
-        this.pctAge = (TextView) findViewById(R.id.Nurse_pctAge);
-        this.medicName = (TextView) findViewById(R.id.Nurse_medic);
-        this.medicCrm = (TextView) findViewById(R.id.Nurse_mediccrm);
-        this.status = (TextView) findViewById(R.id.Nurse_status);
+        this.pctName = (TextView) findViewById(R.id.master_pctName);
+        this.pctAge = (TextView) findViewById(R.id.master_pctAge);
+        this.medicName = (TextView) findViewById(R.id.master_medic);
+        this.medicCrm = (TextView) findViewById(R.id.master_mediccrm);
+        this.status = (TextView) findViewById(R.id.master_status);
 
-        this.textRecipe = (EditText)findViewById(R.id.Nurse_textRecipe);
-        this.textObs = (EditText)findViewById(R.id.Nurse_textObs);
+        this.textRecipe = (EditText)findViewById(R.id.master_textRecipe);
+        this.textObs = (EditText)findViewById(R.id.master_textObs);
 
-        this.btnConfirm = (ImageButton)findViewById(R.id.Nurse_btnConfirmRecipe);
+        this.btnConfirm = (ImageButton)findViewById(R.id.master_btnConfirmRecipe);
 
         this.auxCom = Comunicator.getInstance();
         this.pacient = (Pacient) this.auxCom.get("pacient");
         this.recipe = (Recipe) this.auxCom.get("recipe");
         this.hospitalKey = (String) this.auxCom.get("hospitalKey");
-        this.nurseLoged = (Nurse)Comunicator.getItem("nurse");
+        this.masterLoged = (Master)Comunicator.getItem("master");
 
-        this.pctName.setText(this.pacient.getName());
-        this.pctAge.setText(Long.toString(this.pacient.getAge()) + " anos");
+        this.pctName.setText(this.recipe.getPctName());
+        this.pctAge.setText(Long.toString(this.recipe.getPctAge()) + " anos");
 
         this.medicName.setText(this.recipe.getMedic());
         this.medicCrm.setText(Long.toString(this.recipe.getCrm()));
@@ -83,11 +84,7 @@ public class nurseRecipeView extends Activity {
         this.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date = Calendar.getInstance().getTime().toString();
-                HashMap<String, Object> auxData = new HashMap<String, Object>();
-                auxRef = rootDB.child("Hospital").child(hospitalKey).child("Pacientes").child(pacient.getCpf().toString()).child("Recipes").child(StringFormat.formatRecipeKey(recipe));
-                auxData.put("status", "Aplicado: " + date + ".\n Enfermeiro(a): " + nurseLoged.getName() + "\nCOREN: "+ nurseLoged.getCoren().toString());
-                auxRef.updateChildren(auxData);
+
                 finish();
             }
         });

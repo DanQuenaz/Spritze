@@ -68,6 +68,7 @@ public class listRecipes extends Activity implements SearchView.OnQueryTextListe
                 Comunicator.addObject("recipe", auxReci);
                 Comunicator.addObject("pacient", pacient);
                 Comunicator.addObject("hospitalKey", hospitalKey);
+                Comunicator.addObject("nurse", nurse);
 
                 Intent intent = new Intent(listRecipes.this, nurseRecipeView.class);
                 startActivity(intent);
@@ -84,11 +85,12 @@ public class listRecipes extends Activity implements SearchView.OnQueryTextListe
     }
 
     private void getRecipes(){
+        this.allRecipes.clear();
         this.auxRef = this.rootBD.child("Hospital").child(this.hospitalKey).child("Pacientes").child(Long.toString(pacient.getCpf())).child("Recipes");
         this.auxRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                allRecipes.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Recipe auxRecipe = postSnapshot.getValue(Recipe.class);
                     allRecipes.add(auxRecipe);

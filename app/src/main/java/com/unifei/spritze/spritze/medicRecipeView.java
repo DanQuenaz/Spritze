@@ -60,6 +60,8 @@ public class medicRecipeView extends Activity {
             public void onClick(View view) {
                 auxRec.setObservations(textObs.getText().toString());
                 auxRec.setText(textRecipe.getText().toString());
+                auxRec.setPctName((String)Comunicator.getItem("pacientName"));
+                auxRec.setPctAge((Long)Comunicator.getItem("pacientAge"));
                 String auxKey = auxRec.getDate().replace(".", "");
                 auxKey = auxRec.getRemedy() + auxKey;
                 auxKey = auxKey.replace(" ", "");

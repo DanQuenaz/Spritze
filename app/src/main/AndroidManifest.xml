@@ -27,7 +27,8 @@
         <activity android:name=".registerPacient" />
         <activity android:name=".masterView" />
         <activity android:name=".masterViewDosages" />
-        <activity android:name=".registerCollaborator"></activity>
+        <activity android:name=".registerCollaborator" />
+        <activity android:name=".masterRecipeView"></activity>
     </application>
 
 </manifest>
