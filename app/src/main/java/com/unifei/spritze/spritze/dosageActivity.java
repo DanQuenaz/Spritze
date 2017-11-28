@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -40,6 +41,7 @@ public class dosageActivity extends Activity implements SearchView.OnQueryTextLi
     private TextView pctAge;
     private ListView listDrugs;
     private SearchView filter;
+    private EditText pctWght;
     private ArrayList<Remedy> allDrugs;
     private DatabaseReference rootDB;
     private DatabaseReference auxRef;
@@ -52,6 +54,7 @@ public class dosageActivity extends Activity implements SearchView.OnQueryTextLi
 
         this.pctName = (TextView) findViewById(R.id.pacientName);
         this.pctAge = (TextView) findViewById(R.id.pacientAge);
+        this.pctWght = (EditText) findViewById(R.id.pesoText);
 
         this.pacientName = (String)getIntent().getSerializableExtra("pacientName");
         this.pacientAge = (Long)getIntent().getSerializableExtra("pacientAge");
@@ -71,6 +74,7 @@ public class dosageActivity extends Activity implements SearchView.OnQueryTextLi
         this.listDrugs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                pacientWeight = Double.valueOf( pctWght.getText().toString() );
                 Remedy auxRem = (Remedy)adapterView.getAdapter().getItem(i);
                 String text = DosageCalculation.Calc(auxRem.getName(), pacientWeight, pacientAge);
                 String date = Calendar.getInstance().getTime().toString();
